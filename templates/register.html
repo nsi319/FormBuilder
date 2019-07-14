@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='register.css') }}">
+<head>
+	<h1>FORM BUILDER</h1>
+	<title>
+		Register
+	</title>
+	<h2>REGISTRATION PAGE</h2>
+</head>
+<body>
+	<form method="POST" action="" id = "register">
+	<div class = "form_reg">
+			<label>Name</label>
+			<input type="text" name="name" required>
+			<br>
+			<label>Username:</label>
+			<input type="text" name="username" id = "username" required >
+			<div id = "avail">
+			</div>
+			<br>
+			<label>Password:</label>
+			<input type="password" name="password" required>
+			<br>
+			<br>
+			<label>Confirm Password:</label>
+			<input type="password" name="cpassword" required>
+			<br>
+  {% if error %}
+  <p><b> {{ error }}</b></p> 
+  {% endif %}
+
+  <button type="submit" form="register" value="Submit">Register</button>
+  </div> 
+  </form>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+            $('input[name="username"]').on('change', function(event) {
+              $.ajax({
+                 data :{
+                    username : $('#username').val(),
+                        },
+                    type : 'POST',
+                    url : '/dynuser'
+                   })
+               .done(function(data) {
+                 $('#avail').text(data.output).show();
+             });
+             event.preventDefault();
+             });
+       });
+
+</script>
+</html>

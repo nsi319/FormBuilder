@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='login.css') }}">
+<head>
+	<h1>FORM BUILDER</h1>
+	<title>
+		Login
+	</title>
+	<h2>LOGIN PAGE</h2>
+</head>
+<body>
+	<form method="POST" action="" id = "login">
+	 {% with messages = get_flashed_messages() %}
+	{% if messages %}
+	{% for message in messages %}
+	<p>{{message}}</p>
+	<br>
+	{% endfor %}
+	{% endif %}
+	{% endwith %}
+	<div class= "user_login">
+		<label>Username:</label>
+		<input type="text" name="username" required>
+		<br>
+		<label>Password:</label>
+		<input type="password" name="password" required>
+	</div>
+	<div class="button">
+        <button type="submit" form = "login" value="Submit">Log in</button>
+    </div>
+    {% if error %}
+	 <p><b>{{error}}</b></p>
+	 {% endif %}
+    <p>New to Form Builder?  <a href = "{{ url_for('register') }}" class="new_user">Sign up</a></p>  
+ </form>     
+</body>
+</html>

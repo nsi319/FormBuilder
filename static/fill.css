@@ -1,0 +1,71 @@
+form {
+margin : 0 auto;
+width : 800px;
+padding : 1em;
+border : black solid 1px;
+position : relative;
+box-shadow : 5px 5px 5px;
+background-color : lightgrey;
+}
+form div {
+padding : 10px;
+}
+label {
+font-size : 20px;
+display : inline-block;
+}
+h1 {
+font-size : 30px;
+text-align : center;
+display : block;
+}
+h2 {
+font-size : 15px;
+text-align : center;
+display : block;
+}
+.bg-steel {
+background-color : #5f788a;
+}
+.site-header .navbar-nav .nav-link {
+color : #cbd5db;
+}
+.site-header .navbar-nav .nav-link:hover {
+color : #ffffff;
+}
+.site-header .navbar-nav .nav-link.active {
+font-weight : 500;
+}
+.content-section {
+background : #ffffff;
+padding : 10px 20px;
+border-radius : 3px;
+margin-bottom : 20px;
+}
+.form_add {
+width : 800px;
+padding : 10px;
+background-color : lightgrey;
+margin : auto;
+}
+.button_class {
+display : inline-block;
+}
+.heading {
+font-size : 25px;
+}
+p {
+font-size : 20px;
+font-family : Arial, Helvetica, sans-serif;
+display : inline-block;
+}
+p1 {
+font-size : 25px;
+font-family : Arial, Helvetica, sans-serif;
+display : inline-block;
+}
+p2 {
+font-size : 25px;
+font-family : Arial, Helvetica, sans-serif;
+display : inline-block;
+}

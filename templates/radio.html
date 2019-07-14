@@ -1,0 +1,28 @@
+<div>
+<input type="text" name="ques" id="quest1" placeholder = "Question1" required style="width: 250px;height: 30px">
+  <input type="checkbox" name="reqd1" id="reqd1" onclick="button_req(this)" value="no">
+  <label id="req_button">Required</label>
+</div>
+<div>
+  <select name="anstype" id="anstype1" onchange="setanstype(this)">
+    <option>text</option>
+    <option>number</option>
+    <option>date</option>
+    <option>checkbox</option>
+    <option selected>radio</option>
+    <br>
+  </select>
+</div>
+
+    <input type="hidden" name="opnum" class="opn" value="1"> 
+    <input type="text" placeholder="Option1" name="opts">
+
+<div class="adoptions">
+    <button type="button" class="addop" onclick="addradio()">Add option</button>
+</div>
+<div>
+  <input type="hidden" name="append" id="append">
+  <input type="hidden" name="total" class = "total" value="1">
+ 
+  <button  type="button" class="delete" onclick="delete_ques(this)">Delete</button>
+</div>

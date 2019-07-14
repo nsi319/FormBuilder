@@ -1,0 +1,42 @@
+.form_reg{
+    border:1px solid black;
+    width: 500px;
+    padding: 10px;
+    background-color:lightgrey;
+    margin: auto;
+}
+
+form div{
+    padding: 10px;
+}
+
+label{
+    display: inline-block;
+    text-align: left;
+    width: 100px;
+}
+body {
+    background-image: url("b1.jpg");
+    background-color: lightblue;
+}
+
+input{
+    width: 150px;
+}
+
+h1{
+    font-size: 40px;
+    font-style: bold;
+    text-align: center;
+    display: block;
+}
+h2 {
+    font-size: 30px;
+    font-style: bold;
+    text-align: center;
+    display: block;
+}
+p {
+    font-size: 20px;
+    display: block;
+}

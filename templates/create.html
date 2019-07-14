@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='create.css') }}">
+<head>
+  <title>
+    Create Form
+  </title>
+</head>
+<body>
+ <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">FORM BUILDER</a>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+             <a class="nav-item nav-link" href="{{ url_for('create') }}">Create forms</a>
+              <a class="nav-item nav-link" href="{{ url_for('custom') }}">Custom Template</a>
+              <a class="nav-item nav-link" href="{{ url_for('view') }}">View response</a>
+              <a class="nav-item nav-link" href="{{ url_for('response') }}">Explore</a>
+              <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+</header>
+<br>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <p style="align-self: right"> {{message}}</p>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <div id="spacing">
+   <p><br></p>
+ </div>
+
+  <h2><b>CREATE FORMS</b></h2>
+  {% if error %}
+  <p>{{error}}</p>
+  {% endif %}
+
+<br>
+<div class = "for_ref" style="display: none">
+
+<div class = "ans_opt" id = "options">
+  <input type="text" name="ans_opts" placeholder="Option1">
+</div>
+
+<div id="new_question">
+<input type="text" name="ques" id="quest1" placeholder = "Question1" required>
+
+  <input type="checkbox" name="reqd1" id="reqd1" onclick="button_req(this)" value="yes" checked>
+  <label id="req_button">Required</label>
+
+  <select name="anstype" id="anstype1" onchange="setanstype(this)">
+    <option selected>text</option>
+    <option>number</option>
+    <option>date</option>
+    <option>checkbox</option>
+    <option>radio</option>
+    <br>
+  </select>
+  <input type="hidden" name="fieldno" class="fieldno" value="0">
+  <input type="hidden" name="append" id="append">
+   <div class="for_rad">
+    <input type="hidden" name="noth">
+  </div>
+  <button  type="button" class="delete" onclick="delete_ques(this)">Delete</button>
+</div>
+
+<div id = "textbox">
+  <input type = "text" name="text" readonly>
+</div>
+<div id = "numberbox">
+  <input type = "number" name="num" readonly>
+</div>
+<div id = "datebox">
+  <input type = "date" name="dt" readonly>
+</div>
+<div id = "checkboxbox">
+  <input type="number" name="num_optsc" id="num_optsc" class="num_optsc" min=1 placeholder="Number of options">
+  <input type="button" value="Enter choices" onclick="set_check(this)">
+</div>
+<div id = "radiobox">
+  <input type="number" name="num_optsr" id="num_optsr" class = "num_optsr" min=1 placeholder="Number of options">
+  <input type="button" value="Enter choices" onclick="set_radio(this)">
+</div>
+</div>
+
+
+
+ <div class = "formclass">
+  <form method = "POST" id = "q_form" action="">
+    <div class="info" style="border: 1px solid black">
+    <br>
+  <pre>
+  <p>TITLE:            </p><input type="text" name="title" id="title" required>
+  <div id = "avail"></div>
+  <p>DESCRIPTION:      </p><input type="text" name="desc" id="desc" required>
+  <p>DEADLINE:         </p><input type="date" name="deadline" id="dead"  >
+  <p>LIMIT SUBMISSION: </p><input type="number" name="sub_limit" min=1 >
+  <input type="hidden" name="total" class = "total" id="total" value="1">
+  </pre>
+</div>
+  <label><b>QUESTIONS: </b></label><br>
+
+  <div class = "field" onclick="change_form(this)" onmouseover="make_orange(this)" onmouseout="make_black(this)">
+  <input type="text" name="ques" id="quest1" placeholder = "Question1" required>
+
+  <input type="checkbox" name="reqd1" id="reqd1" onclick="button_req(this)" value="yes" checked>
+  <label id="req_button">Required</label>
+
+  <select name="anstype" id="anstype1" onchange="setanstype(this)">
+    <option selected>text</option>
+    <option>number</option>
+    <option>date</option>
+    <option>checkbox</option>
+    <option>radio</option>
+    <br>
+  </select>
+  <input type="hidden" name="fieldno" class="fieldno" value="0">
+  <div class="for_rad">
+    <input type="hidden" name="noth">
+  </div>
+  <button  type="button" class="delete" onclick="delete_ques(this)">Delete</button><br>
+  </div>
+</div>
+</form>
+</div>
+  <div class="button_class" align="center">
+  <button onclick="addques()" id="add_ques">ADD QUESTION</button>
+  <button type = "submit" id="sub_ques" form ="q_form" value="Submit">CREATE FORM</button>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+            $('input[name="title"]').on('change', function(event) {
+              $.ajax({
+                 data :{
+                    title : $('#title').val(),
+                        },
+                    type : 'POST',
+                    url : '/dyntitle'
+                   })
+               .done(function(data) {
+                 $('#avail').text(data.output).show();
+             });
+             event.preventDefault();
+             });
+       });
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("dead").setAttribute("min", today);
+
+  var val = 0;
+  var field = document.getElementsByClassName("field");
+  var ans_opt = document.getElementsByClassName("ans_opt");
+  var val_opt = 0;
+  var current = field[val];
+  var current_opts = ans_opt[val_opt];
+  var current_val=val;
+
+  var form = document.getElementById("q_form");
+
+
+  function button_req (b) {
+    if (b.checked == true)
+      b.value = "yes";
+    else
+      b.value = "no";
+  }
+
+  function addques() {
+    var new_ques = document.createElement("div");
+    var field = document.getElementsByClassName("field");
+    new_ques.class = "field";
+    new_ques.innerHTML = document.getElementById("new_question").innerHTML;
+    new_ques.getElementsByTagName('input')[0].placeholder="Question" + (val+2);
+    new_ques.getElementsByTagName('input')[1].name="reqd" + (val+2);
+    new_ques.getElementsByTagName('input')[2].value = String(val + 1);
+    new_ques.addEventListener('click',function(){ 
+      change_form(new_ques);
+    });
+    new_ques.addEventListener('mouseover',function(){ 
+      make_orange(new_ques);
+    });
+    new_ques.addEventListener('mouseout',function(){ 
+      make_black(new_ques);
+    });
+    new_ques.style.border = "1px solid black";
+    form.appendChild(document.createElement("br"));
+     form.appendChild(document.createElement("br"));
+    if(val==-1)
+    form.insertBefore(new_ques,form.getElementsByClassName("delete")[0]);
+    else {
+      form.appendChild(new_ques);
+    }
+    val++;
+     console.log(new_ques.getElementsByTagName('input')[2].value + " from addques " + val);
+     var k = document.getElementById("total").value;
+     document.getElementById("total").value = String(parseInt(k)+1);
+  }
+
+  function setanstype(at) {
+    var anstype = at.options[at.selectedIndex].text;
+    console.log("inside setanstype" + anstype);
+    current.getElementsByClassName("for_rad")[0].innerHTML="";
+
+    if(anstype == "radio" || anstype == "checkbox") {
+      current.getElementsByClassName("for_rad")[0].innerHTML=`{% include 'chbx_rad.html' %}`;
+      current.appendChild(document.createElement("br"));
+    }
+  }
+
+function addoption () {
+      var v = current.getElementsByClassName("opn")[0].value;
+      var new_opt = document.createElement("input");
+      new_opt.name = "opts";
+      new_opt.type = "text";
+      new_opt.style.width = "150px";
+      new_opt.style.height="30px";
+      new_opt.placeholder = "Option" + String(parseInt(v)+1);
+      new_opt.style.placeholders
+      current.getElementsByClassName("for_rad")[0].appendChild(new_opt);
+      current.getElementsByClassName("opn")[0].value = String(parseInt(v)+1);
+    }
+
+ function delete_ques(f) {
+  var k = document.getElementById("total").value;
+  document.getElementById("total").value = String(parseInt(k)-1);
+  if(current_val == 0) {
+      while (current.hasChildNodes()) {   
+  current.removeChild(current.firstChild);
+}
+}
+else
+  f.parentNode.remove();
+f.style.display="none";
+ }
+ function change_form(f) {
+  current = f;
+}
+function make_orange(f) {
+  current = f;
+  f.style.border = "2px solid orange";
+}
+function make_black(f) {
+  f.style.border = "1px solid black";
+}
+document.getElementById("q_form").onkeypress = function(e) {
+  var key = e.charCode || e.keyCode || 0;     
+  if (key == 13) {
+    e.preventDefault();
+  }
+}
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

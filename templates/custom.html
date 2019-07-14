@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='custom.css') }}">
+<head>
+  <title>
+    Create Form
+  </title>
+</head>
+<body>
+ <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">FORM BUILDER</a>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{{ url_for('create') }}">Create forms</a>
+              <a class="nav-item nav-link" href="{{ url_for('custom') }}">Custom Template</a>
+              <a class="nav-item nav-link" href="{{ url_for('view') }}">View response</a>
+              <a class="nav-item nav-link" href="{{ url_for('response') }}">Explore</a>
+              <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+</header>
+<br>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  <p style="align-self: right"> {{message}}</p>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <div id="spacing">
+   <p><br></p>
+ </div>
+
+  <h2><b>CUSTOM FORMS: PERSONAL DETAILS</b></h2>
+  {% if error %}
+  <p>{{error}}</p>
+  {% endif %}
+
+<br>
+ <div class = "formclass" align="center">
+  <form method = "POST" id = "q_form" action="">
+    <div class="info" style="border: 2px solid black">
+    <br>
+  <pre>
+  <p>TITLE:            </p><input type="text" name="title" id="title" required>
+  <div id = "avail" align="center"></div>
+  <p>DESCRIPTION:      </p><input type="text" name="desc" id="desc" required>
+  <p>DEADLINE:         </p><input type="date" name="deadline" id="dead" >
+  <p>LIMIT SUBMISSION: </p><input type="number" name="sub_limit" min=1 >
+  <input type="hidden" name="total" class = "total" id="total" value="1">
+  </pre>
+</div>
+<br>
+  <label><b>QUESTIONS: </b></label><br>
+   <div align="left">
+  <p>Name:*            </p><input type="text" name="ans1"  readonly><br>
+  <p>Age:*              </p><input type="number" name="ans2"  readonly><br>
+  <p>Mobile Number:*    </p><input type="number" name="ans3"  readonly><br>
+  <p>Email Address:*    </p><input type="email" name="ans4"  readonly><br>
+</div>
+</form>
+</div>
+  <div class="button_class" align="center">
+  <button type = "submit" id="sub_ques" form ="q_form" value="Submit">CREATE FORM</button>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+            $('input[name="title"]').on('change', function(event) {
+              $.ajax({
+                 data :{
+                    title : $('#title').val(),
+                        },
+                    type : 'POST',
+                    url : '/dyntitle'
+                   })
+               .done(function(data) {
+                 $('#avail').text(data.output).show();
+             });
+             event.preventDefault();
+             });
+       });
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+ if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("dead").setAttribute("min", today);
+
+document.getElementById("q_form").onkeypress = function(e) {
+  var key = e.charCode || e.keyCode || 0;     
+  if (key == 13) {
+    e.preventDefault();
+  }
+}
+
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

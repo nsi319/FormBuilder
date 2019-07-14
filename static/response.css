@@ -1,0 +1,82 @@
+.parent {
+width : 800px;
+padding : 50px;
+display : inline-block;
+background-color : lightgrey;
+margin : auto;
+}
+.forms_class {
+width : 100%;
+max-width : 100%;
+padding : 50px;
+display : inline-block;
+background-color : lightgrey;
+margin : auto;
+}
+body {
+    background-image: url("b1.jpg");
+}
+form {
+display : inline-block;
+}
+#container {
+display : inline-block;
+}
+form div {
+padding : 10px;
+}
+label {
+font-size : 15px;
+}
+h1 {
+font-size : 30px;
+text-align : center;
+display : block;
+}
+h2 {
+font-size : 20px;
+text-align : center;
+display : block;
+}
+a{
+color: black;
+font-size: 15px;
+}
+.bg-steel {
+background-color : #5f788a;
+}
+.site-header .navbar-nav .nav-link {
+color : #cbd5db;
+}
+.site-header .navbar-nav .nav-link:hover {
+color : #ffffff;
+}
+.site-header .navbar-nav .nav-link.active {
+font-weight : 500;
+}
+.content-section {
+background : #ffffff;
+padding : 10px 20px;
+border-radius : 3px;
+margin-bottom : 20px;
+}
+.form_add {
+width : 800px;
+padding : 10px;
+background-color : lightgrey;
+margin : auto;
+}
+.button_class {
+display : inline-block;
+}
+.heading {
+font-size : 20px;
+}
+p {
+font-size : 15px;
+display : inline-block;
+}
+.title_desc {
+width : 800px;
+background-color : lightgrey;
+}

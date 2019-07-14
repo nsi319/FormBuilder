@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='user_response.css') }}">
+<head>
+  <title>
+    Create Form
+  </title>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
+ <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">FORM BUILDER</a>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+             <a class="nav-item nav-link" href="{{ url_for('create') }}">Create forms</a>
+              <a class="nav-item nav-link" href="{{ url_for('custom') }}">Custom Template</a>
+              <a class="nav-item nav-link" href="{{ url_for('view') }}">View response</a>
+              <a class="nav-item nav-link" href="{{ url_for('response') }}">Explore</a>
+              <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+</header>
+<br>
+<p id="spacing"><br><br></p>
+
+  <div class = "heading" align="center">
+    <p><b>VIEW FORM RESPONSES</b></p>
+  </div>
+
+  {% if result %}
+  <pre>
+  <p><b>CREATOR:           </b></p><p>{{result[0][0]}}</p><br>
+  <p><b>TITLE:             </b></p><p>{{result[0][1]}}</p><br>
+</pre>
+ <p><a href = "{{url_for('analytics',name = result[0][0] ,title = result[0][1] )}}" style = "color: blue;font-size: 20px">
+  <b>RESPONSE ANALYSIS</b></a></p>
+  
+  <div id="share" class="fb-share-button" data-href="{{url_for('form_response',name=result[0][0],title=result[0][1])}}" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A5000%2Fresponse%2Fbanu%2F26&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fa fa-facebook-official" style="font-size:36px"></i></a></div>
+
+ <div class = "forms_class" style="width: 100%">
+  <table width="700px">
+    <tr>
+      <th><b>Q.No</b></th>
+      <th><b>QUESTION</b></th>
+      <th><b>RESPONSE</b></th>
+      <th><b>RESPUSER</b></th>
+    </tr>
+  {% set nq = namespace(v=-1) %}
+  {% for r in result %}
+
+    {% if r[6] != nq.v %}
+    <tr>  
+      <td>{{r[6]}}</td>
+      <td><b>{{r[7]}}</b></td>
+      <td>{{r[3]}}</td>
+      <td>{{r[2]}}</td>
+    </tr>
+
+    {% endif %}
+    {% set nq.v = r[6] %}
+    <tr>
+      <td>&nbsp;</td> 
+      <td>&nbsp;</td>
+      <td>{{r[3]}}</td>
+      <td>{{r[2]}}</td>
+    </tr>
+  {% endfor %}
+  </table>
+
+
+  <!--
+  {% if resform %}
+  {% set bq = namespace(v=-1) %}
+  {% for re in resform %}
+  {% if re[8] != bq.v %}
+  {% if re[5]=="radio" or re[5]=="checkbox" %}
+
+  <img src = "{{'myplot' + (re[8])|string + (re[1])|string + '.png'}}" alt= "{{'myplot' + (re[8])|string + (re[1])|string}}" width="400" height="400">
+  {% endif %}
+  {% endif %}
+  {% set bq.v = re[8] %}
+  {% endfor %}
+   {% endif %}
+ -->
+{% endif %}
+</div>
+</body>
+</html>

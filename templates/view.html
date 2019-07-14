@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<link rel="stylesheet"  type="text/css" href="{{ url_for('static',filename='view.css') }}">
+<head>
+  <title>
+    Create Form
+  </title>
+</head>
+<body>
+ <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">FORM BUILDER</a>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+             <a class="nav-item nav-link" href="{{ url_for('create') }}">Create forms</a>
+              <a class="nav-item nav-link" href="{{ url_for('custom') }}">Custom Template</a>
+              <a class="nav-item nav-link" href="{{ url_for('view') }}">View response</a>
+              <a class="nav-item nav-link" href="{{ url_for('response') }}">Explore</a>
+              <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+</header>
+<br>
+<p id="spacing"><br><br></p>
+
+  <div class = "heading" align="center">
+    <p><b>FORM RESPONSES</b></p>
+  </div>
+
+  {% if error %}
+  <h2>{{error}}</h2>
+  {% endif %}
+
+  <div class = "forms_class" style="width: 100%">
+  {% if result %}
+  {% for r in result %}
+  <p><a href = "{{url_for('form_response',name = r[0] ,title = r[1] )}}" style="color: black;font-size: 15px;"><b>Title:</b> {{r[1]}}</a> ({{r[10]}})</p>
+  <br>
+  {% endfor %}
+  {% endif %}
+</div>
+
+</body>
+</html>

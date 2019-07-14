@@ -1,0 +1,57 @@
+form{
+    border:2px solid black;
+    width: 500px;
+    padding: 10px;
+    background-color:lightgrey;
+    margin: auto;
+}
+
+form div{
+    padding: 10px;
+}
+
+label{
+    display: inline-block;
+    text-align: left;
+    width: 100px;
+}
+
+input{
+    width: 150px;
+}
+
+h1{
+    font-size: 40px;
+    font-style: bold;
+    text-align: center;
+    display: block;
+}
+h2 {
+    font-size: 30px;
+    font-style: bold;
+    text-align: center;
+    display: block;
+}
+.bg-steel {
+  background-color: #5f788a;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,81 @@
+.heading-container {
+text-align : center;
+}
+.heading {
+display : inline-block;
+}
+body {
+	background-image: url("b1.jpg");
+}
+.forms_class {
+width : 100%;
+background-color : lightgrey;
+align-content : center;
+margin : 0 auto;
+}
+.info {
+border : black solid 2px;
+}
+.field {
+border : black solid 1px;
+}
+label {
+font-size : 25px;
+}
+body {
+background-color : lightgrey;
+align-self : center;
+align-content : center;
+}
+h1 {
+font-size : 40px;
+text-align : center;
+display : block;
+}
+h2 {
+font-size : 30px;
+text-align : center;
+display : block;
+}
+input[type="text"] {
+width : 300px;
+height : 40px;
+font-size : 20px;
+color : black;
+}
+input[type="date"], input[type="number"] {
+width : 200px;
+height : 30px;
+font-size : 15px;
+color : black;
+}
+.bg-steel {
+background-color : #5f788a;
+}
+.site-header .navbar-nav .nav-link {
+color : #cbd5db;
+}
+.site-header .navbar-nav .nav-link:hover {
+color : #ffffff;
+}
+.site-header .navbar-nav .nav-link.active {
+font-weight : 500;
+}
+.content-section {
+background : #ffffff;
+padding : 10px 20px;
+border-radius : 3px;
+margin-bottom : 20px;
+}
+button {
+width : 80px;
+height : 30px;
+display : inline-block;
+}
+.heading {
+font-size : 25px;
+}
+p {
+font-size : 25px;
+display : inline-block;
+}
